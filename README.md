@@ -25,7 +25,7 @@ The library provides two Renderers: **Console** and **Html**, which are used for
 ```
 - Or create other custom Renders, just follow the `Renderer` interface
 
-# Usage of binary tool "proto_decoder"
+# Use the prebuilt tool "proto_decoder"
 supported: text/file with hex-string/binary/base64/zlib encoding
 
 eg:
@@ -41,7 +41,7 @@ pro "08 01 12 03   04 05
 - zlib+base64 file: `pro -zlib -b64 -file a.bin`
 - ...
 
-# How to build
+# Or build it yourself
 1. Install Golang
 2. clone this repo: `git clone github.com/aj3423/aproto`
 3. go to binary dir: `cd aproto/proto_decoder`
