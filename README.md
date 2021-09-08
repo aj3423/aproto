@@ -43,7 +43,7 @@ pro "08 01 12 03   04 05
 
 # Or build it yourself
 1. Install Golang
-2. clone this repo: `git clone github.com/aj3423/aproto`
+2. clone this repo: `git clone https://github.com/aj3423/aproto`
 3. go to binary dir: `cd aproto/proto_decoder`
 4. `go build .`
 
