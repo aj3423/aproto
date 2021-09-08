@@ -1,5 +1,5 @@
 # Descryption
-Decode protocol buffer without message definition.
+Golang module/tool for decoding proto buffer without message definition.
 
 # Try it online
 http://pb-decode.online/
