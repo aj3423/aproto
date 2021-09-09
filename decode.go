@@ -8,15 +8,6 @@ import (
 	"github.com/golang/protobuf/proto"
 )
 
-//func IsAsciiPrintable(s string) bool {
-//for _, r := range s {
-//if r > unicode.MaxASCII || !unicode.IsPrint(r) {
-//return false
-//}
-//}
-//return true
-//}
-
 // 0	Varint	int32, int64, uint32, uint64, sint32, sint64, bool, enum
 // 1	64-bit	fixed64, sfixed64, double
 // 2	Length-delimited	string, bytes, embedded messages, packed repeated fields

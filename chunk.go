@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math"
 	"strings"
-	"unicode/utf8"
 )
 
 type ChunkType int
@@ -77,9 +76,6 @@ func (x *Varint) Render(indent string, r Renderer) string {
 func (x *Varint) Type() ChunkType {
 	return CT_Varint
 }
-func (x *Varint) TypeStr() string {
-	return `varint`
-}
 
 // ---- fixed64 ----
 type Fixed64 struct {
@@ -100,9 +96,6 @@ func (x *Fixed64) Render(indent string, r Renderer) string {
 func (x *Fixed64) Type() ChunkType {
 	return CT_Fixed64
 }
-func (x *Fixed64) TypeStr() string {
-	return `fixed64/double`
-}
 
 // ---- struct ----
 type Struct struct {
@@ -122,14 +115,14 @@ func (x *Struct) Render(indent string, r Renderer) string {
 	if x.Children != nil { // is struct
 
 		/*
-			Sometime a binary string can also be miss parsed to struct, eg:
+			Sometimes a binary string may be miss parsed to struct, eg:
 				"31303030303633303535313238384846"
-			will be parsed to:
+			is parsed to:
 				[31] 6 fixed64/double: 3832619590722007088 (0x3530333630303030) (0.000000)
 				[35] 6 fixed32/float: 943206961 (0x38383231) (0.000044)
 				[48] 9 varint: 70 (0x46)
 			The longer the data is, the less likely it could be miss parsed.
-			So just print it first if it's not very long(<=32 bytes)
+			So print the hex dump first, if it's not very long(<=32 bytes)
 		*/
 		//if len(x.Str) <= 32 {
 		//ret += fmt.Sprintf("% x", x.Str)
@@ -142,10 +135,19 @@ func (x *Struct) Render(indent string, r Renderer) string {
 			lines = append(lines, ch.Render(indent+r.INDENT(), r))
 		}
 		ret += strings.Join(lines, r.NEWLINE())
+
 	} else { // is string
-		// if printable
-		if utf8.ValidString(string(x.Str)) { // empty string also goes here
-			ret += r.STR(string(x.Str))
+
+		// detect charset like GBK...
+		bs, charset, e := detect_charset(x.Str)
+
+		// find a charset, it's printable
+		if e == nil { // empty string also goes here
+			// show name of charset if not utf8
+			if charset != `utf8` {
+				ret += `[` + charset + `] `
+			}
+			ret += r.STR(string(bs))
 
 			// in practice, string may contain special character, also print hex dump if string is short
 			if len(x.Str) <= 8 && len(x.Str) > 0 {
@@ -164,9 +166,6 @@ func (x *Struct) Render(indent string, r Renderer) string {
 }
 func (x *Struct) Type() ChunkType {
 	return CT_Struct
-}
-func (x *Struct) TypeStr() string {
-	return `string`
 }
 
 // ---- fixed32 ----
@@ -187,7 +186,4 @@ func (x *Fixed32) Render(indent string, r Renderer) string {
 }
 func (x *Fixed32) Type() ChunkType {
 	return CT_Fixed32
-}
-func (x *Fixed32) TypeStr() string {
-	return `fixed32/float`
 }
