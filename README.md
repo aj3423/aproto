@@ -1,4 +1,4 @@
-# Descryption
+# Description
 Golang module/tool for decoding proto buffer without message definition.
 
 # Try it online
@@ -12,12 +12,14 @@ The library provides two Renderers: **Console** and **Html**, which are used for
 
 - ConsoleRenderer
 ```
-  out, e := aproto.TryDumpEx([]byte{...}, &aproto.ConsoleRenderer{})
-  // or just:
   out, e := aproto.TryDump([]byte{...})
   fmt.Println(out)
+  
+  // or:
+  out, e := aproto.TryDumpEx([]byte{...}, &aproto.ConsoleRenderer{})
+
 ```
-- HtmlRenderer
+- HtmlRenderer (used on demo site)
 ```
   out, e := aproto.TryDumpEx([]byte{...}, &aproto.HtmlRenderer{})
   // transfer the output to client browser, render it with
