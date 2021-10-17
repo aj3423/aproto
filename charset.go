@@ -35,9 +35,15 @@ func (x *GBK) Name() string {
 	return `GBK`
 }
 
-// used to detect string encoding
+/*
+Used to detect string encoding, utf8 by default
+Customize this array to decode other charset, eg: &GBK{}
+Custom charset causes too much miss-decoding,
+normal binary rendered as GBK, so disabled by default.
+*/
 var List []Charset = []Charset{
-	&Utf8{}, &GBK{},
+	&Utf8{},
+	//&GBK{},
 }
 
 func detect_charset(data []byte) ([]byte, string, error) {
