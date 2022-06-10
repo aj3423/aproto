@@ -2,7 +2,7 @@
 Golang module/tool for decoding proto buffer without message definition.
 
 # Try it online
-http://pb-decode.online/
+https://168.138.55.177/
 
 # Screenshot
 ![pb](https://user-images.githubusercontent.com/4710875/122819817-7ff91d00-d30d-11eb-9c0a-c8d46ee2b821.png)
