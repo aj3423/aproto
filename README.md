@@ -49,3 +49,5 @@ pro "08 01 12 03   04 05
 3. go to binary dir: `cd aproto/proto_decoder`
 4. `go build .`
 
+# License
+MIT
