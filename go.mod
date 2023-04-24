@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/fatih/color v1.12.0
 	github.com/golang/protobuf v1.5.2
+	github.com/pkg/errors v0.9.1
 	golang.org/x/text v0.3.7
 )
 

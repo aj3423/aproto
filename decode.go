@@ -2,10 +2,10 @@ package aproto
 
 import (
 	"encoding/binary"
-	"errors"
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/pkg/errors"
 )
 
 // 0	Varint	int32, int64, uint32, uint64, sint32, sint64, bool, enum
@@ -166,7 +166,7 @@ func decode_all_chunks(data []byte) ([]Chunk, error) {
 	for pos < uint64(len(data)) {
 		chunk, chunk_len, e := decode_1_chunk(data[pos:])
 		if e != nil {
-			return ret, e
+			return ret, errors.Wrap(e, fmt.Sprintf("chunk: %x", data[pos:]))
 		}
 		ret = append(ret, chunk)
 		pos += chunk_len
