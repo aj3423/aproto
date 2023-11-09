@@ -1,5 +1,7 @@
-# Description
-Golang module/tool for decoding proto buffer without message definition.
+# **Deprecated**
+Use the python version instead: https://github.com/aj3423/protod
+
+# Decode protobuf without message definition.
 
 # Try it online
 https://168.138.55.177/
